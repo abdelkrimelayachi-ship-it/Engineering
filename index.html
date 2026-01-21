@@ -2,14 +2,18 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>Engineering</title>
+  <title>Engineering App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: white;
       display: flex;
       justify-content: center;
@@ -18,62 +22,67 @@
     }
 
     .app {
-      background: rgba(0,0,0,0.3);
-      padding: 25px;
-      border-radius: 15px;
+      background: rgba(0,0,0,0.4);
+      padding: 30px;
+      border-radius: 20px;
       width: 90%;
       max-width: 400px;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     h1 {
       margin-bottom: 10px;
+      font-size: 26px;
     }
 
     p {
-      font-size: 14px;
+      font-size: 15px;
       opacity: 0.9;
     }
 
     button {
       margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      background: #00e676;
-      color: #000;
-      cursor: pointer;
+      padding: 14px;
       width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #00ffcc;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     button:hover {
-      background: #00c853;
+      background: #00e6b8;
     }
 
     .result {
       margin-top: 20px;
       font-size: 16px;
-      min-height: 24px;
     }
   </style>
 </head>
 
 <body>
   <div class="app">
-    <h1>Engineering App</h1>
-    <p>welcome to engineering</p>
+    <h1>Engineering</h1>
+    <p>مرحبا بك فـ تطبيق Engineering<br>تطبيق جميل، بسيط، ومغربي ❤️</p>
 
-    <button onclick="showMessage()">ضغط هنا</button>
+    <button onclick="hello()">إضغط هنا</button>
 
     <div class="result" id="result"></div>
   </div>
 
   <script>
-    function showMessage() {
+    function hello() {
       document.getElementById("result").innerText =
-        "🔥 التطبيق خدام مزيان! 🔥";
+        "✨ مرحبا بك! التطبيق خدام مزيان ✨";
+    }
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
     }
   </script>
 </body>
