@@ -1,89 +1,205 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>Engineering App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Engineering Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0a0a0a">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .app {
-      background: rgba(0,0,0,0.4);
-      padding: 30px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
-
-    h1 {
-      margin-bottom: 10px;
-      font-size: 26px;
-    }
-
-    p {
-      font-size: 15px;
-      opacity: 0.9;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 14px;
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      background: #00ffcc;
-      color: #000;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #00e6b8;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 16px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#0f766e,#0ea5e9);
+  color:#fff;
+}
+header{
+  background:#020617;
+  padding:15px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:15px;
+}
+.card{
+  background:rgba(2,6,23,0.9);
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:15px;
+}
+.ad{
+  background:#020617;
+  border:2px dashed #22d3ee;
+  text-align:center;
+}
+h2{margin-top:0;color:#38bdf8}
+button,input{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:10px;
+  font-size:15px;
+}
+input{color:#000}
+button{
+  background:#22d3ee;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{background:#38bdf8}
+.score{
+  text-align:center;
+  margin-bottom:15px;
+  font-size:18px;
+}
+.result{margin-top:6px;font-weight:bold}
+.correct{color:#4ade80}
+.wrong{color:#f87171}
+.footer{
+  text-align:center;
+  font-size:12px;
+  opacity:0.7;
+  margin-top:20px;
+}
+a{color:#22d3ee;text-decoration:none}
+</style>
 </head>
 
 <body>
-  <div class="app">
-    <h1>Engineering</h1>
-    <p>مرحبا بك فـ تطبيق Engineering<br>تطبيق جميل، بسيط، ومغربي ❤️</p>
 
-    <button onclick="hello()">إضغط هنا</button>
+<header>🎓 Engineering Academy</header>
 
-    <div class="result" id="result"></div>
-  </div>
+<div class="container">
 
-  <script>
-    function hello() {
-      document.getElementById("result").innerText =
-        "✨ مرحبا بك! التطبيق خدام مزيان ✨";
-    }
+<!-- LOGIN -->
+<div class="card" id="login">
+<h2>👤 مرحبا</h2>
+<p>دخل اسمك وبدا التعلّم</p>
+<input id="username" placeholder="اسمك">
+<button onclick="saveName()">دخول</button>
+</div>
 
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js");
-    }
-  </script>
+<div class="score">
+👋 مرحبا <span id="name"></span><br>
+⭐ النقاط: <span id="score">0</span>
+</div>
+
+<!-- LESSON 1 -->
+<div class="card">
+<h2>📘 ما هي الهندسة؟</h2>
+<p>
+الهندسة علم يعتمد على الرياضيات والعلوم
+لتصميم وبناء حلول تقنية تخدم الإنسان.
+</p>
+</div>
+
+<!-- AUTO AD -->
+<div class="card ad">
+<h2>📢 إعلان</h2>
+<p id="ad-text">تحميل كورسات هندسية مفيدة</p>
+<a id="ad-link" href="#" target="_blank">
+<button>شوف العرض</button>
+</a>
+</div>
+
+<!-- LESSON 2 -->
+<div class="card">
+<h2>📘 الهندسة المدنية</h2>
+<p>
+تهتم ببناء الطرق، الجسور، والمباني.
+</p>
+</div>
+
+<!-- AUTO AD -->
+<div class="card ad">
+<h2>📢 إعلان</h2>
+<p id="ad-text-2">تعلم البرمجة للمهندسين</p>
+<a id="ad-link-2" href="#" target="_blank">
+<button>سجّل الآن</button>
+</a>
+</div>
+
+<!-- LESSON 3 -->
+<div class="card">
+<h2>📘 الهندسة المعلوماتية</h2>
+<p>
+تركز على البرمجة، التطبيقات،
+والذكاء الاصطناعي.
+</p>
+</div>
+
+<!-- QUIZ -->
+<div class="card">
+<h2>❓ سؤال</h2>
+<p>شنو هي الهندسة؟</p>
+<button onclick="check(this,true)">علم التصميم والبناء</button>
+<button onclick="check(this,false)">علم الطب</button>
+<button onclick="check(this,false)">علم الفلاحة</button>
+<div class="result"></div>
+</div>
+
+<div class="footer">
+نستعمل إعلانات وروابط داعمة لدعم تطوير التطبيق.
+</div>
+
+</div>
+
+<script>
+/* USER + SCORE */
+let score = Number(localStorage.getItem("score")) || 0;
+let name = localStorage.getItem("name");
+document.getElementById("score").innerText = score;
+
+if(name){
+  document.getElementById("name").innerText = name;
+  document.getElementById("login").style.display="none";
+}
+
+function saveName(){
+  let n = document.getElementById("username").value;
+  if(n){
+    localStorage.setItem("name",n);
+    location.reload();
+  }
+}
+
+function check(btn,correct){
+  let res = btn.parentElement.querySelector(".result");
+  if(correct){
+    res.innerText="✅ جواب صحيح";
+    res.className="result correct";
+    score += 10;
+    localStorage.setItem("score",score);
+    document.getElementById("score").innerText = score;
+  }else{
+    res.innerText="❌ جواب خاطئ";
+    res.className="result wrong";
+  }
+}
+
+/* AUTO ADS */
+const ads = [
+  {text:"كورس هندسة شامل للمبتدئين", link:"https://example.com"},
+  {text:"تعلم البرمجة للمهندسين", link:"https://example.com"},
+  {text:"أفضل كتب الهندسة 2026", link:"https://example.com"}
+];
+
+let i=0;
+function rotateAds(){
+  document.getElementById("ad-text").innerText = ads[i].text;
+  document.getElementById("ad-link").href = ads[i].link;
+  document.getElementById("ad-text-2").innerText = ads[(i+1)%ads.length].text;
+  document.getElementById("ad-link-2").href = ads[(i+1)%ads.length].link;
+  i=(i+1)%ads.length;
+}
+rotateAds();
+setInterval(rotateAds,10000);
+</script>
+
 </body>
 </html>
