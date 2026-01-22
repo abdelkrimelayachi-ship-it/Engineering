@@ -1,220 +1,247 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Engineering Academy PRO</title>
+<title>Engineering Academy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root{
-  --bg:#020617;
-  --card:#020617e6;
-  --primary:#22d3ee;
-  --text:#fff;
-}
-.light{
-  --bg:#f8fafc;
-  --card:#ffffff;
-  --primary:#0284c7;
-  --text:#020617;
-}
 *{box-sizing:border-box}
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:0.3s;
+ margin:0;
+ font-family:system-ui,Arial;
+ background:linear-gradient(135deg,#020617,#0f172a);
+ color:#e5e7eb;
 }
 header{
-  padding:15px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  background:linear-gradient(90deg,#0ea5e9,#22d3ee);
-  color:#020617;
+ background:#020617;
+ padding:20px;
+ text-align:center;
+ font-size:22px;
+ font-weight:600;
 }
 .container{
-  max-width:760px;
-  margin:auto;
-  padding:15px;
+ max-width:960px;
+ margin:auto;
+ padding:16px;
 }
 .card{
-  background:var(--card);
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+ background:rgba(15,23,42,.92);
+ border-radius:22px;
+ padding:22px;
+ margin-bottom:20px;
 }
-h2{margin-top:0;color:var(--primary)}
-button,input{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border:none;
-  border-radius:12px;
-  font-size:15px;
+h2{
+ color:#7dd3fc;
+ font-weight:600;
 }
-input{color:#000}
+.lesson{
+ max-height:260px;
+ overflow-y:auto;
+ line-height:1.75;
+}
 button{
-  background:var(--primary);
-  font-weight:bold;
-  cursor:pointer;
+ width:100%;
+ padding:14px;
+ margin-top:14px;
+ border:none;
+ border-radius:14px;
+ background:#38bdf8;
+ font-weight:600;
+ cursor:pointer;
 }
-.progress{
-  height:10px;
-  background:#1e293b;
-  border-radius:10px;
-  overflow:hidden;
-}
-.progress span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:#4ade80;
-}
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:20px;
-  background:#4ade80;
-  color:#020617;
-  font-size:12px;
-  font-weight:bold;
-}
-.ad{
-  border:2px dashed var(--primary);
-  text-align:center;
+button:disabled{
+ background:#334155;
+ cursor:not-allowed;
 }
 .footer{
-  text-align:center;
-  font-size:12px;
-  opacity:0.7;
+ text-align:center;
+ font-size:12px;
+ opacity:.4;
+ margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-⚡ Engineering Academy PRO
-<button onclick="toggleMode()" style="margin-top:10px">🌙 / ☀️</button>
-</header>
+<header>Engineering Academy</header>
 
 <div class="container">
 
-<!-- LOGIN -->
-<div class="card" id="login">
-<h2>👤 مرحبا</h2>
-<p>دخل اسمك وبدأ تجربة احترافية</p>
-<input id="username" placeholder="اسمك">
-<button onclick="saveName()">دخول</button>
-</div>
-
-<!-- USER -->
-<div class="card">
-👋 مرحبا <b id="name"></b><br>
-⭐ النقاط: <span id="score">0</span><br><br>
-<div class="progress"><span id="progress"></span></div>
-</div>
-
-<!-- NOTIFICATION -->
-<div class="card">
-<h2>🔔 إشعار</h2>
-<p id="notif">مرحبا بك! كمّل الدروس لتربح نقاط 🎯</p>
-</div>
-
-<!-- LESSON -->
-<div class="card">
-<h2>📘 ما هي الهندسة؟</h2>
+<!-- CIVIL -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Civil</h2>
 <p>
-الهندسة علم عالمي يجمع بين التفكير، الإبداع، والتكنولوجيا
-لبناء حلول مستقبلية.
+Le génie civil s’intéresse à la conception et à la réalisation
+des infrastructures essentielles.
 </p>
-<button onclick="addScore()">أنهيت الدرس</button>
+<p>
+Routes, ponts, bâtiments et barrages
+nécessitent une compréhension profonde
+des matériaux et de l’environnement.
+</p>
+<p>
+Chaque projet repose sur la précision,
+l’anticipation et la responsabilité.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
 </div>
 
-<!-- AD -->
-<div class="card ad">
-<h2>📢 إعلان ذكي</h2>
-<p id="ad-text"></p>
-<a id="ad-link" target="_blank"><button>اكتشف</button></a>
+<!-- ELECTRICAL -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Électrique</h2>
+<p>
+L’électricité est au cœur des systèmes modernes.
+</p>
+<p>
+La production, la distribution et la gestion
+de l’énergie exigent rigueur et sécurité.
+</p>
+<p>
+Un bon ingénieur électrique pense
+en termes de stabilité et d’efficacité.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
 </div>
 
-<!-- ACHIEVEMENTS -->
-<div class="card">
-<h2>🏆 إنجازات</h2>
-<div id="badges"></div>
+<!-- MECHANICAL -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Mécanique</h2>
+<p>
+Le mouvement est au centre du génie mécanique.
+</p>
+<p>
+Machines, moteurs et structures
+doivent fonctionner avec précision.
+</p>
+<p>
+L’amélioration continue est une logique naturelle
+dans ce domaine.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
 </div>
 
-<!-- CONTACT -->
-<div class="card">
-<h2>📲 تواصل</h2>
-<a href="https://t.me/engineering_maroc" target="_blank"><button>Telegram</button></a>
-<a href="https://wa.me/212625732843" target="_blank"><button>WhatsApp</button></a>
+<!-- COMPUTER -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Informatique</h2>
+<p>
+Les systèmes numériques évoluent rapidement.
+</p>
+<p>
+La programmation demande de la clarté,
+de la logique et de la patience.
+</p>
+<p>
+La maîtrise vient avec la pratique régulière,
+souvent silencieuse.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
+</div>
+
+<!-- INDUSTRIAL -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Industriel</h2>
+<p>
+L’optimisation est l’objectif principal.
+</p>
+<p>
+Organisation, processus et performance
+doivent être alignés.
+</p>
+<p>
+Les décisions sont guidées par l’analyse
+et l’amélioration continue.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
+</div>
+
+<!-- CHEMICAL -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Génie Chimique</h2>
+<p>
+La transformation de la matière
+nécessite précision et contrôle.
+</p>
+<p>
+Chaque réaction est étudiée
+pour garantir sécurité et rendement.
+</p>
+<p>
+Le détail fait souvent toute la différence.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
+</div>
+
+<!-- TELECOM -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Télécommunications</h2>
+<p>
+La transmission de l’information
+doit être rapide et fiable.
+</p>
+<p>
+Les réseaux modernes exigent
+une conception robuste.
+</p>
+<p>
+La stabilité est toujours prioritaire.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
+</div>
+
+<!-- AI -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Intelligence Artificielle</h2>
+<p>
+L’IA repose sur l’analyse des données.
+</p>
+<p>
+Les modèles s’améliorent avec l’expérience
+et l’observation.
+</p>
+<p>
+La progression est souvent progressive
+mais constante.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
+</div>
+
+<!-- ENERGY -->
+<div class="card lesson" onscroll="unlock(this)">
+<h2>Énergies Renouvelables</h2>
+<p>
+L’avenir énergétique repose sur la durabilité.
+</p>
+<p>
+Solaire, éolien et hydraulique
+demandent des solutions fiables.
+</p>
+<p>
+La vision long terme est essentielle.
+</p>
+<button disabled onclick="finish(this)">Continuer</button>
 </div>
 
 <div class="footer">
-نسخة PRO – تجربة عالمية 🇺🇸 🇨🇳
+Engineering Academy
 </div>
 
 </div>
 
 <script>
-let score = Number(localStorage.getItem("score"))||0;
-let name = localStorage.getItem("name");
-let mode = localStorage.getItem("mode");
-
-if(mode==="light") document.body.classList.add("light");
-
-document.getElementById("score").innerText=score;
-document.getElementById("progress").style.width=Math.min(score,100)+"%";
-
-if(name){
- document.getElementById("name").innerText=name;
- document.getElementById("login").style.display="none";
+function unlock(el){
+ let btn = el.querySelector("button");
+ if(el.scrollTop + el.clientHeight >= el.scrollHeight - 5){
+  btn.disabled = false;
+ }
 }
 
-function saveName(){
- let n=document.getElementById("username").value;
- if(n){localStorage.setItem("name",n);location.reload();}
+function finish(btn){
+ if(btn.dataset.ok) return;
+ btn.dataset.ok = true;
+ btn.innerText = "✓";
 }
-
-function addScore(){
- score+=20;
- localStorage.setItem("score",score);
- document.getElementById("score").innerText=score;
- document.getElementById("progress").style.width=Math.min(score,100)+"%";
- checkBadges();
-}
-
-function checkBadges(){
- let b=document.getElementById("badges");
- b.innerHTML="";
- if(score>=20) b.innerHTML+='<span class="badge">Beginner</span> ';
- if(score>=60) b.innerHTML+='<span class="badge">Advanced</span> ';
- if(score>=100) b.innerHTML+='<span class="badge">PRO</span>';
-}
-
-function toggleMode(){
- document.body.classList.toggle("light");
- localStorage.setItem("mode",document.body.classList.contains("light")?"light":"dark");
-}
-
-/* ADS */
-const ads=[
-{text:"كورس عالمي معتمد",link:"https://example.com"},
-{text:"أفضل أدوات المهندسين",link:"https://example.com"},
-{text:"تعلم الذكاء الاصطناعي",link:"https://example.com"}
-];
-let i=0;
-function rotateAds(){
- document.getElementById("ad-text").innerText=ads[i].text;
- document.getElementById("ad-link").href=ads[i].link;
- i=(i+1)%ads.length;
-}
-rotateAds();
-setInterval(rotateAds,8000);
 </script>
 
 </body>
