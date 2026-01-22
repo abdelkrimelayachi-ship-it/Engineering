@@ -1,11 +1,10 @@
 {
-  "name": "Engineering Academy",
+  "name": "Engineering World",
   "short_name": "Engineering",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#020617",
-  "theme_color": "#38bdf8",
-  "description": "Plateforme éducative pour ingénieurs – apprendre avec discipline et vision.",
+  "theme_color": "#020617",
   "icons": [
     {
       "src": "icon-192.png",
