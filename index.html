@@ -1,98 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TalkLink</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>TalkLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== Manifest embedded ===== -->
+<link rel="manifest" href='data:application/manifest+json,{
+  "name":"TalkLink",
+  "short_name":"TalkLink",
+  "description":"Global talking platform",
+  "start_url":".",
+  "display":"standalone",
+  "background_color":"#020617",
+  "theme_color":"#0f172a"
+}'>
+
+<meta name="theme-color" content="#0f172a">
+
+<!-- ===== CSS ===== -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{
+  background:linear-gradient(180deg,#020617,#0f172a);
+  color:#e5e7eb;
+  min-height:100vh;
+}
+header{
+  text-align:center;
+  padding:20px;
+  border-bottom:1px solid #1e293b;
+}
+header h1{color:#38bdf8;font-size:28px}
+nav ul{
+  display:flex;
+  justify-content:center;
+  list-style:none;
+  border-bottom:1px solid #1e293b;
+}
+nav li{margin:10px}
+nav a{color:#e5e7eb;text-decoration:none}
+main{max-width:900px;margin:auto;padding:20px}
+section{margin-bottom:30px}
+h2{color:#38bdf8;margin-bottom:10px}
+article{
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:10px;
+}
+input,textarea{
+  width:100%;
+  padding:10px;
+  background:#0f172a;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+}
+button{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  background:#38bdf8;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+#messages div{
+  background:#0f172a;
+  padding:8px;
+  border-radius:6px;
+  margin-bottom:5px;
+}
+footer{
+  text-align:center;
+  font-size:12px;
+  opacity:.6;
+  padding:10px;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <h1>TalkLink</h1>
-    <p>Connect. Talk. Share.</p>
-  </header>
+<header>
+  <h1>TalkLink</h1>
+  <p>Connect. Talk. Share.</p>
+</header>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#talk">Talk</a></li>
-      <li><a href="#profile">Profile</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </nav>
+<nav>
+  <ul>
+    <li><a href="#talk">Talk</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-  <!-- MAIN CONTENT -->
-  <main>
+<main>
 
-    <!-- HOME SECTION -->
-    <section id="home">
-      <h2>Welcome to TalkLink</h2>
-      <p>
-        TalkLink is a global platform where people can freely
-        express ideas, communicate, and connect with others.
-      </p>
-    </section>
+<section id="talk">
+<h2>Global Talk</h2>
 
-    <!-- TALK SECTION -->
-    <section id="talk">
-      <h2>Global Talk</h2>
+<article>
+<input id="name" placeholder="Your name">
+</article>
 
-      <!-- USER NAME -->
-      <article>
-        <h3>Your Name</h3>
-        <input type="text" placeholder="Enter your name">
-      </article>
+<article>
+<textarea id="msg" placeholder="Your message"></textarea>
+<button onclick="sendMsg()">Send</button>
+</article>
 
-      <!-- MESSAGE INPUT -->
-      <article>
-        <h3>Your Message</h3>
-        <textarea placeholder="Write something to the world"></textarea>
-        <button>Send</button>
-      </article>
+<article>
+<h3>Live</h3>
+<div id="messages"></div>
+</article>
+</section>
 
-      <!-- MESSAGES FEED -->
-      <article>
-        <h3>Live Messages</h3>
+<section id="about">
+<h2>About</h2>
+<p>TalkLink is a simple global communication platform.</p>
+</section>
 
-        <div>
-          <p><strong>User123:</strong> Hello everyone 👋</p>
-        </div>
+</main>
 
-        <div>
-          <p><strong>User456:</strong> TalkLink is a great idea.</p>
-        </div>
+<footer>© TalkLink</footer>
 
-      </article>
-    </section>
+<!-- ===== JS ===== -->
+<script>
+const nameInput=document.getElementById("name");
+const msgInput=document.getElementById("msg");
+const box=document.getElementById("messages");
 
-    <!-- PROFILE SECTION -->
-    <section id="profile">
-      <h2>Your Profile</h2>
-      <p>
-        This section will represent your personal space
-        inside TalkLink.
-      </p>
-    </section>
+nameInput.value=localStorage.getItem("tl_name")||"";
 
-    <!-- ABOUT SECTION -->
-    <section id="about">
-      <h2>About TalkLink</h2>
-      <p>
-        TalkLink combines instant messaging,
-        social interaction, and open communication
-        into one simple global platform.
-      </p>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 TalkLink. All rights reserved.</p>
-  </footer>
+function sendMsg(){
+  if(!nameInput.value||!msgInput.value){
+    alert("Fill all fields");
+    return;
+  }
+  localStorage.setItem("tl_name",nameInput.value);
+  const d=document.createElement("div");
+  d.innerHTML="<b>"+nameInput.value+":</b> "+msgInput.value;
+  box.appendChild(d);
+  msgInput.value="";
+}
+</script>
 
 </body>
 </html>
