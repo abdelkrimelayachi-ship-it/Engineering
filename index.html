@@ -4,244 +4,202 @@
 <meta charset="UTF-8">
 <title>Engineering Academy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:system-ui,Arial;
- background:linear-gradient(135deg,#020617,#0f172a);
- color:#e5e7eb;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:#e5e7eb;
 }
 header{
- background:#020617;
- padding:20px;
- text-align:center;
- font-size:22px;
- font-weight:600;
+  background:#020617;
+  padding:16px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  color:#38bdf8;
 }
 .container{
- max-width:960px;
- margin:auto;
- padding:16px;
+  max-width:800px;
+  margin:auto;
+  padding:15px;
 }
 .card{
- background:rgba(15,23,42,.92);
- border-radius:22px;
- padding:22px;
- margin-bottom:20px;
+  background:rgba(15,23,42,0.95);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
-h2{
- color:#7dd3fc;
- font-weight:600;
-}
-.lesson{
- max-height:260px;
- overflow-y:auto;
- line-height:1.75;
-}
+.hidden{display:none}
+h2{color:#38bdf8;margin-top:0}
+p{line-height:1.6}
 button{
- width:100%;
- padding:14px;
- margin-top:14px;
- border:none;
- border-radius:14px;
- background:#38bdf8;
- font-weight:600;
- cursor:pointer;
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  background:#38bdf8;
+  color:#020617;
+  cursor:pointer;
 }
 button:disabled{
- background:#334155;
- cursor:not-allowed;
+  background:#334155;
+  color:#94a3b8;
+  cursor:not-allowed;
+}
+.progress{
+  height:10px;
+  background:#1e293b;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.progress div{
+  height:100%;
+  width:0%;
+  background:#22c55e;
+}
+.score{
+  text-align:center;
+  margin-bottom:15px;
+  font-size:16px;
 }
 .footer{
- text-align:center;
- font-size:12px;
- opacity:.4;
- margin-top:40px;
+  text-align:center;
+  font-size:12px;
+  opacity:0.6;
+  margin:25px 0;
 }
 </style>
 </head>
 
 <body>
 
-<header>Engineering Academy</header>
+<header>⚡ Engineering Academy</header>
 
 <div class="container">
 
-<!-- CIVIL -->
-<div class="card lesson" onscroll="unlock(this)">
+<!-- LOGIN -->
+<div class="card" id="login">
+<h2>Bienvenue</h2>
+<p>Entrez votre prénom pour commencer votre parcours.</p>
+<input id="username" placeholder="Votre prénom" style="width:100%;padding:12px;border-radius:10px;border:none;">
+<button onclick="start()">Commencer</button>
+</div>
+
+<div id="app" class="hidden">
+
+<div class="score">
+👋 <span id="name"></span> — ⭐ Points: <span id="score">0</span>
+<div class="progress"><div id="bar"></div></div>
+</div>
+
+<!-- LESSONS -->
+<div class="card lesson">
+<h2>Qu’est-ce que l’ingénierie ?</h2>
+<p>
+L’ingénierie est l’art de transformer les idées en solutions concrètes.
+Elle repose sur la rigueur, la logique et la responsabilité.
+</p>
+<p>
+Chaque ingénieur apprend à penser avant d’agir.
+</p>
+<button disabled>Continuer</button>
+</div>
+
+<div class="card lesson hidden">
 <h2>Génie Civil</h2>
 <p>
-Le génie civil s’intéresse à la conception et à la réalisation
-des infrastructures essentielles.
+Le génie civil façonne le monde réel: routes, ponts, bâtiments.
+Chaque décision impacte la sécurité et la durabilité.
 </p>
-<p>
-Routes, ponts, bâtiments et barrages
-nécessitent une compréhension profonde
-des matériaux et de l’environnement.
-</p>
-<p>
-Chaque projet repose sur la précision,
-l’anticipation et la responsabilité.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
+<button disabled>Continuer</button>
 </div>
 
-<!-- ELECTRICAL -->
-<div class="card lesson" onscroll="unlock(this)">
+<div class="card lesson hidden">
 <h2>Génie Électrique</h2>
 <p>
-L’électricité est au cœur des systèmes modernes.
+L’énergie alimente la société moderne.
+Un ingénieur électrique vise stabilité, efficacité et prévention.
 </p>
-<p>
-La production, la distribution et la gestion
-de l’énergie exigent rigueur et sécurité.
-</p>
-<p>
-Un bon ingénieur électrique pense
-en termes de stabilité et d’efficacité.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
+<button disabled>Continuer</button>
 </div>
 
-<!-- MECHANICAL -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Génie Mécanique</h2>
-<p>
-Le mouvement est au centre du génie mécanique.
-</p>
-<p>
-Machines, moteurs et structures
-doivent fonctionner avec précision.
-</p>
-<p>
-L’amélioration continue est une logique naturelle
-dans ce domaine.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
-</div>
-
-<!-- COMPUTER -->
-<div class="card lesson" onscroll="unlock(this)">
+<div class="card lesson hidden">
 <h2>Génie Informatique</h2>
 <p>
-Les systèmes numériques évoluent rapidement.
+Le logiciel structure le monde numérique.
+La précision et la clarté sont essentielles à chaque ligne de code.
 </p>
-<p>
-La programmation demande de la clarté,
-de la logique et de la patience.
-</p>
-<p>
-La maîtrise vient avec la pratique régulière,
-souvent silencieuse.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
+<button disabled>Continuer</button>
 </div>
 
-<!-- INDUSTRIAL -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Génie Industriel</h2>
+<div class="card lesson hidden">
+<h2>Génie Mécanique</h2>
 <p>
-L’optimisation est l’objectif principal.
+Les systèmes mécaniques exigent anticipation et compréhension profonde
+des forces et des matériaux.
 </p>
-<p>
-Organisation, processus et performance
-doivent être alignés.
-</p>
-<p>
-Les décisions sont guidées par l’analyse
-et l’amélioration continue.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
+<button disabled>Terminer le parcours</button>
 </div>
 
-<!-- CHEMICAL -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Génie Chimique</h2>
-<p>
-La transformation de la matière
-nécessite précision et contrôle.
-</p>
-<p>
-Chaque réaction est étudiée
-pour garantir sécurité et rendement.
-</p>
-<p>
-Le détail fait souvent toute la différence.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
-</div>
-
-<!-- TELECOM -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Télécommunications</h2>
-<p>
-La transmission de l’information
-doit être rapide et fiable.
-</p>
-<p>
-Les réseaux modernes exigent
-une conception robuste.
-</p>
-<p>
-La stabilité est toujours prioritaire.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
-</div>
-
-<!-- AI -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Intelligence Artificielle</h2>
-<p>
-L’IA repose sur l’analyse des données.
-</p>
-<p>
-Les modèles s’améliorent avec l’expérience
-et l’observation.
-</p>
-<p>
-La progression est souvent progressive
-mais constante.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
-</div>
-
-<!-- ENERGY -->
-<div class="card lesson" onscroll="unlock(this)">
-<h2>Énergies Renouvelables</h2>
-<p>
-L’avenir énergétique repose sur la durabilité.
-</p>
-<p>
-Solaire, éolien et hydraulique
-demandent des solutions fiables.
-</p>
-<p>
-La vision long terme est essentielle.
-</p>
-<button disabled onclick="finish(this)">Continuer</button>
 </div>
 
 <div class="footer">
-Engineering Academy
+Engineering Academy © Discipline • Vision • Construction
 </div>
 
 </div>
 
 <script>
-function unlock(el){
- let btn = el.querySelector("button");
- if(el.scrollTop + el.clientHeight >= el.scrollHeight - 5){
-  btn.disabled = false;
- }
+let score = Number(localStorage.getItem("score")) || 0;
+let name = localStorage.getItem("name");
+let lessons = [];
+let index = 0;
+
+function start(){
+  const n = document.getElementById("username").value;
+  if(!n) return;
+  localStorage.setItem("name",n);
+  location.reload();
 }
 
-function finish(btn){
- if(btn.dataset.ok) return;
- btn.dataset.ok = true;
- btn.innerText = "✓";
+if(name){
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("name").innerText = name;
 }
+
+document.getElementById("score").innerText = score;
+
+lessons = document.querySelectorAll(".lesson");
+
+lessons.forEach((lesson,i)=>{
+  lesson.addEventListener("scroll",()=>{
+    if(lesson.scrollTop + lesson.clientHeight >= lesson.scrollHeight-5){
+      lesson.querySelector("button").disabled=false;
+    }
+  });
+  lesson.querySelector("button").onclick=()=>{
+    score += 20;
+    localStorage.setItem("score",score);
+    document.getElementById("score").innerText = score;
+    lesson.classList.add("hidden");
+    if(lessons[i+1]){
+      lessons[i+1].classList.remove("hidden");
+      index++;
+      document.getElementById("bar").style.width=((index)/lessons.length*100)+"%";
+    }else{
+      document.getElementById("bar").style.width="100%";
+      alert("Parcours terminé. Continuez à apprendre.");
+    }
+  };
+});
 </script>
 
 </body>
