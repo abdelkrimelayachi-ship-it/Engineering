@@ -1,10 +1,12 @@
 {
-  "name": "Engineering World",
-  "short_name": "Engineering",
-  "start_url": ".",
+  "name": "TalkLink",
+  "short_name": "TalkLink",
+  "description": "TalkLink is a global platform to talk, connect and share freely.",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#020617",
-  "theme_color": "#020617",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
