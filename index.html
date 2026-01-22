@@ -2,148 +2,128 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<title>Engineering World</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Academy</title>
 
+<!-- PWA -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0ea5e9">
+<meta name="theme-color" content="#020617">
 
 <style>
 body{
   margin:0;
-  font-family:system-ui;
-  background:#020617;
+  font-family:Arial,sans-serif;
+  background:#0b1220;
   color:#e5e7eb;
 }
 header{
-  background:linear-gradient(135deg,#0284c7,#0ea5e9);
-  padding:20px;
+  background:#020617;
+  padding:16px;
   text-align:center;
   font-size:22px;
-  font-weight:700;
-  color:#020617;
+  font-weight:bold;
 }
-.container{padding:16px}
-.card{
-  background:#020b1f;
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:18px;
-  box-shadow:0 15px 40px rgba(0,0,0,.5)
-}
-.progress{
+nav{
+  display:flex;
+  justify-content:space-around;
   background:#020617;
-  border-radius:12px;
-  height:12px;
-  overflow:hidden;
-  margin-top:10px
-}
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:#22c55e;
-  transition:.4s
-}
-button{
+  position:fixed;
+  bottom:0;
   width:100%;
-  padding:14px;
-  margin-top:14px;
+}
+nav button{
+  flex:1;
+  padding:12px;
   border:none;
-  border-radius:14px;
-  background:#0ea5e9;
-  color:#020617;
-  font-size:16px;
-  font-weight:700;
+  background:none;
+  color:#38bdf8;
+  font-size:14px;
 }
-button:disabled{
-  background:#334155;
-  color:#94a3b8
+section{
+  display:none;
+  padding:20px;
+  padding-bottom:70px;
 }
-label{display:block;margin:8px 0}
-footer{
+.active{display:block}
+.card{
+  background:#020617;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+h2{color:#38bdf8;margin-top:0}
+.ad{
+  border:2px dashed #38bdf8;
   text-align:center;
-  font-size:12px;
-  color:#64748b;
-  padding:20px
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
 
-<header>⚡ Engineering Academy</header>
+<header>🌍 Engineering World</header>
 
-<div class="container">
+<section id="home" class="active">
+  <div class="card">
+    <h2>Comprendre le monde moderne</h2>
+    <p>
+      Les technologies et infrastructures reposent
+      sur des principes clairs et rationnels.
+    </p>
+  </div>
 
-<!-- PROFIL -->
-<div class="card">
-👋 Bonjour <b>futurs ingénieurs</b><br>
-⭐ Points : <span id="points">0</span>
+  <div class="card ad">
+    📢 Publicité
+  </div>
+</section>
 
-<div class="progress">
-  <div class="progress-bar" id="bar"></div>
-</div>
-</div>
+<section id="courses">
+  <div class="card">
+    <h2>Génie Civil</h2>
+    <p>Routes, bâtiments, structures.</p>
+  </div>
 
-<!-- COURS -->
-<div class="card">
-<h3>Génie Informatique</h3>
-<p>
-Les systèmes performants reposent sur la logique,
-la rigueur et la capacité à anticiper.
-</p>
+  <div class="card">
+    <h2>Génie Informatique</h2>
+    <p>Logiciels, données, IA.</p>
+  </div>
 
-<label><input type="checkbox"> Algorithmes fondamentaux</label>
-<label><input type="checkbox"> Structures de données</label>
-<label><input type="checkbox"> Sécurité logicielle</label>
-<label><input type="checkbox"> Optimisation des systèmes</label>
+  <div class="card ad">
+    📢 Sponsor
+  </div>
 
-<button id="finish" disabled>Terminer le cours</button>
-</div>
+  <div class="card">
+    <h2>Génie Électrique</h2>
+    <p>Énergie et automatisation.</p>
+  </div>
+</section>
 
-<!-- AUTRES BRANCHES -->
-<div class="card">
-<h3>Autres branches</h3>
-<ul>
-<li>Génie Civil</li>
-<li>Génie Mécanique</li>
-<li>Génie Électrique</li>
-<li>Génie Industriel</li>
-<li>Génie Énergétique</li>
-<li>Génie Télécom</li>
-</ul>
-</div>
+<section id="contact">
+  <div class="card">
+    <h2>Contact</h2>
+    <p>
+      Telegram : engineering_maroc<br>
+      WhatsApp : +212625732843
+    </p>
+  </div>
+</section>
 
-</div>
-
-<footer>
-Engineering Academy — constance, vision, précision
-</footer>
+<nav>
+  <button onclick="show('home')">Accueil</button>
+  <button onclick="show('courses')">Cours</button>
+  <button onclick="show('contact')">Contact</button>
+</nav>
 
 <script>
-let points=0;
-const checks=document.querySelectorAll("input[type=checkbox]");
-const btn=document.getElementById("finish");
-const bar=document.getElementById("bar");
-const pts=document.getElementById("points");
-
-checks.forEach(c=>c.addEventListener("change",update));
-
-function update(){
- let done=[...checks].filter(c=>c.checked).length;
- let percent=(done/checks.length)*100;
- bar.style.width=percent+"%";
- btn.disabled=done!==checks.length;
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-btn.onclick=()=>{
- points+=150;
- pts.textContent=points;
- btn.disabled=true;
-};
-
-if("serviceWorker" in navigator){
- navigator.serviceWorker.register("sw.js");
+// Service Worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 
