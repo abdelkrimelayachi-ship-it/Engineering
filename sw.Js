@@ -1,7 +1,22 @@
-self.addEventListener("install", e => {
-  e.waitUntil(
-    caches.open("engineering-cache").then(cache => {
-      return cache.addAll(["./"]);
+const CACHE_NAME = "engineering-app-v1";
+const urlsToCache = [
+  "./",
+  "./index.html",
+  "./manifest.json"
+];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
     })
   );
 });
